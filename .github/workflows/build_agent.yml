@@ -23,10 +23,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Check needed variables
+      # Check build variables
       - name: ${{ github.event.inputs.environment }} - Build variables and environment
         run: |
-          echo "Configuration: ${{ github.event.inputs.environment }}"
+          echo "Configuration: [${{ github.event.inputs.environment }}]"
+
+      # Validate build configurations
+      - name: Validate build conditions
+        if: ${{ github.event.inputs.environment }} != 'debug' || ${{ github.event.inputs.environment }} != 'release'
+        run: |
+          echo "Valid build configurations only: [debug] [release]"
+          echo "Selected configuration: [${{ github.event.inputs.environment }}]"
+          exit 1
 
       ##################################################
       # .Net Framework 4.8 Setups
