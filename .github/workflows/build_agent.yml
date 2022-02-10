@@ -1,4 +1,6 @@
 # This is a basic workflow to help you get started with Actions
+name: CI - build agent
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -8,8 +10,6 @@ on:
         description: 'Build configuration'
         required: true
         default: 'debug'
-
-name: CI - ${{ github.event.inputs.environment }} build
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,7 +22,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
+      # Check needed variables
+      - name: Build variables and environment
+        run: |
+          echo "Configuration: ${{ github.event.inputs.environment }}"
+
       ##################################################
       # .Net Framework 4.8 Setups
       ##################################################
