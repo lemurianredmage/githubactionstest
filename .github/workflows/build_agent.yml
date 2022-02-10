@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Check needed variables
-      - name: Build variables and environment
+      - name: ${{ github.event.inputs.environment }} - Build variables and environment
         run: |
           echo "Configuration: ${{ github.event.inputs.environment }}"
 
