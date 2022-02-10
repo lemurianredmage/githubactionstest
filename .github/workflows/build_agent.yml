@@ -23,7 +23,7 @@ jobs:
       # Validate build conditions
       - name: Validate build conditions
         run: |
-          if (("${{ github.event.inputs.environment }}" -ne "debug" -or "${{ github.event.inputs.environment }}" -ne "release")); then
+          if (("${{ github.event.inputs.environment }}" -ne "debug" -or "${{ github.event.inputs.environment }}" -ne "release")) then
             echo "Valid build configurations only: [debug] [release]"
             echo "Selected configuration: [${{ github.event.inputs.environment }}]"
             exit 1
